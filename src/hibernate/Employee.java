@@ -9,12 +9,15 @@ package hibernate;
  *
  * @author Raf
  */
+import java.util.*;
+
 public class Employee {
 
     private int id;
     private String firstName;
     private String lastName;
     private int salary;
+    private Set certificates;
 
     public Employee() {
     }
@@ -55,5 +58,13 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Set getCertificates() {
+        return certificates;
+    }
+
+    public void setCertificates(Set certificates) {
+        this.certificates = certificates;
     }
 }
