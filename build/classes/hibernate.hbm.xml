@@ -3,21 +3,9 @@
         <meta attribute="class-description"> This class contains the employee detail. </meta> 
         <id name="id" type="int" column="id"> 
             <generator class="native"/> 
-        </id> 
-        <map name="certificates" cascade="all" sort="hibernate.MyClass"> 
-            <key column="employee_id"/> 
-            <index column="certificate_type" type="string"/>
-            <one-to-many class="hibernate.Certificate"/> 
-        </map> 
+        </id>
         <property name="firstName" column="first_name" type="string"/> 
         <property name="lastName" column="last_name" type="string"/> 
         <property name="salary" column="salary" type="int"/> 
-    </class> 
-    <class name="hibernate.Certificate" table="CERTIFICATE"> 
-        <meta attribute="class-description"> This class contains the certificate records. </meta> 
-        <id name="id" type="int" column="id"> 
-            <generator class="native"/> 
-        </id> 
-        <property name="name" column="certificate_name" type="string"/> 
     </class> 
 </hibernate-mapping>
