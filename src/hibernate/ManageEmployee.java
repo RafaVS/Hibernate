@@ -18,6 +18,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
 /**
  *
  * @author Enrique
@@ -33,17 +34,19 @@ public class ManageEmployee {
         ServiceRegistry service = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         factory = configuration.buildSessionFactory(service);
     }
-    
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
         ManageEmployee ME = new ManageEmployee(); /* Add few employee records in database */ Integer empID1 = ME.addEmployee("Zara", "Ali", 1000);
         Integer empID2 = ME.addEmployee("Daisy", "Das", 5000);
-        Integer empID3 = ME.addEmployee("John", "Paul", 10000); /* List down all the employees */ 
+        Integer empID3 = ME.addEmployee("John", "Paul", 10000); /* List down all the employees */
 
         ME.listEmployees();
 
         ME.updateEmployee(empID1, 5000);
 
         ME.deleteEmployee(empID2);
+
+        ME.selectOrder();
 
         ME.listEmployees();
     }
@@ -121,6 +124,29 @@ public class ManageEmployee {
             tx = session.beginTransaction();
             Employee employee = (Employee) session.get(Employee.class, EmployeeID);
             session.delete(employee);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    private void selectOrder() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            String select = "SELECT E.firstName, E.salary FROM Employee E WHERE E.id > 10 ORDER BY E.salary DESC";
+            List employees = session.createQuery(select).list();
+            for (Iterator iterator = employees.iterator(); iterator.hasNext();) {
+                Object[] datos = (Object[]) iterator.next();
+                System.out.println("First Name: " + (String) datos[0] + " - Salary: " + (Integer) datos[1]);
+            }
+            System.out.println();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
