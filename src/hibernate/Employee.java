@@ -9,8 +9,6 @@ package hibernate;
  *
  * @author Raf
  */
-import java.util.*;
-
 public class Employee {
 
     private int id;

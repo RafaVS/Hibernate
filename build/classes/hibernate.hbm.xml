@@ -3,7 +3,7 @@
         <meta attribute="class-description"> This class contains the employee detail. </meta> 
         <id name="id" type="int" column="id"> 
             <generator class="native"/> 
-        </id>
+        </id> 
         <property name="firstName" column="first_name" type="string"/> 
         <property name="lastName" column="last_name" type="string"/> 
         <property name="salary" column="salary" type="int"/> 
