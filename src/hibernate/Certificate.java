@@ -9,7 +9,7 @@ package hibernate;
  *
  * @author Raf
  */
-public class Certificate implements Comparable<Certificate> {
+public class Certificate {
 
     private int id;
     private String name;
@@ -35,22 +35,5 @@ public class Certificate implements Comparable<Certificate> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int compareTo(Certificate that) {
-        final int BEFORE = -1;
-        final int AFTER = 1;
-        if (that == null) {
-            return BEFORE;
-        }
-        Comparable thisCertificate = this.getName();
-        Comparable thatCertificate = that.getName();
-        if (thisCertificate == null) {
-            return AFTER;
-        } else if (thatCertificate == null) {
-            return BEFORE;
-        } else {
-            return thisCertificate.compareTo(thatCertificate);
-        }
     }
 }
